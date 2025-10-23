@@ -1,4 +1,5 @@
 
+import itertools
 import random
 import time
 import pandas as pd
@@ -6,7 +7,7 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 
 # Set the page title and icon and set layout to "wide" to minimise margains
-st.set_page_config(page_title="Witches Brew 2025", page_icon=":sorceress:")
+st.set_page_config(page_title="Witches Brew 2025", page_icon=":sorceress:", layout="wide")
 
 def main():
     head_l, head_r = st.columns((1.5,1), vertical_alignment="center")
@@ -28,13 +29,15 @@ def main():
         """)
     with st.expander("The roll table!", expanded=True):
         data = {
-            "Alcohol_1": ["Vodka", "Whiskey", "Rum", "Gin", "Tequila", "Brandy", "Beer", "Wine", "Sake", "Mezcal", "Liqueur", "Absinthe"],
-            "Alcohol_2": ["Vodka", "Whiskey", "Rum", "Gin", "Tequila", "Brandy", "Beer", "Wine", "Sake", "Mezcal", "Liqueur", "Absinthe"],
-            "Mixer_1": ["Cola", "Tonic Water", "Soda Water", "Ginger Ale", "Cranberry Juice", "Orange Juice", "Pineapple Juice", "Grapefruit Juice", "Lemon Juice", "Lime Juice", "Simple Syrup", "Grenadine"],
-            "Mixer_2": ["Cola", "Tonic Water", "Soda Water", "Ginger Ale", "Cranberry Juice", "Orange Juice", "Pineapple Juice", "Grapefruit Juice", "Lemon Juice", "Lime Juice", "Simple Syrup", "Grenadine"],
-            "Garnish": ["Lime Wedge", "Lemon Twist", "Orange Slice", "Maraschino Cherry", "Olive", "Mint Sprig", "Celery Stalk", "Salt Rim", "Sugar Rim", "Cocktail Onion", "Cinnamon Stick", "Cucumber Ribbon"]
+            "Alcohol_1": ['Keylime Pie Gin', 'Rhubarb Gin', 'Custom Gin', 'Mead', 'Khalua', "Bailey's", 'Buckfast', 'Port', 'Spiced Rum', 'Prosecco', 'Blue Curacao', 'Chocolate Cream Liquer', 'Peach Brandy', 'Opihir Gin', 'Gin', 'Chocolate Orange Gin Liquer'],
+            "Alcohol_2": ['Keylime Pie Gin', 'Rhubarb Gin', 'Custom Gin', 'Mead', 'Khalua', "Bailey's", 'Buckfast', 'Port', 'Spiced Rum', 'Prosecco', 'Blue Curacao', 'Chocolate Cream Liquer', 'Peach Brandy', 'Opihir Gin', 'Gin', 'Chocolate Orange Gin Liquer'],
+            "Mixer_1": ['Sloe Simple Syrup', 'Ginger Beer (Non-alcoholic)', 'Pepsi (reg)', 'Pepsi (max)', 'Lemonade', 'Tonic', 'Orange Juice', 'Grenadine'],
+            "Mixer_2": ['Sloe Simple Syrup', 'Ginger Beer (Non-alcoholic)', 'Pepsi (reg)', 'Pepsi (max)', 'Lemonade', 'Tonic', 'Orange Juice', 'Grenadine'],
+            "Garnish": ['Rosemary', 'Organge Slice', 'Lemon Slice', 'Cucumber']
         }
-        df = pd.DataFrame(data)
+        st.write(len(data["Alcohol_1"]))
+        zipped_data = list(itertools.zip_longest(*data.values()))
+        df = pd.DataFrame(zipped_data, columns=data.keys())
         df.index = range(1, len(df) + 1)
         st.table(df)
 
