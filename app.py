@@ -28,14 +28,23 @@ def main():
             \nIf this all seems like a bit much and just want to make a rum and coke, go for it. You do you boo :heart:
         """)
     with st.expander("The roll table!", expanded=True):
+        core_alcohols = ['None', 'Prosecco', 'Spiced Rum', 'JD Honey', 'Opihir Gin', "Greenal's Gin", 'Whiskey', 'Gin', 'Pimms', 'Your Choice']
+        specialty_alcohols = ["None", "Bailey's", 'Chcoclate Cream Liquer', 'Blue WKD', 'Buckfast', 'Christmas Pudding Gin',
+                              'Keylime Pie Gin', 'Chocolate Orange Gin Liquer', 'Custom Gin', 'Rhubarb Gin', 'Mead',
+                              'Peach Schnaps', 'Peach Brandy', 'Blue Curacao', 'Southern Comfort', 'Port', 'Pernod',
+                              'Vermouth', 'Khalua', "Your Choice"]
+        mixer = ['None', 'Fanta Fruit Twist', 'Pepsi (max)', 'Pepsi (reg)', 'Tropical Juice', 'Watermelon Juice',
+                 'Lemon&Lime Juice', 'Grenadine', 'Tomato Juice', 'Apple Juice', 'Pineapple Juice',
+                 'Ginger Beer (Non-alcoholic)', 'Orange Juice', 'Cranberry Juice', 'Lemonade', 'Ginger Ale', 'Bitters',
+                 'Tonic', 'Simple Syrup', 'Your Choice']
+        garnish = ['None', 'Rosemary', 'Mint', 'Basil', 'Celery', 'Cucumber', 'Olives', 'Cherries', 'Cocktail Umbrella', "Lemon Slice", "Orange Slice", "Lime Slice"]
         data = {
-            "Alcohol_1": ['Keylime Pie Gin', 'Rhubarb Gin', 'Custom Gin', 'Mead', 'Khalua', "Bailey's", 'Buckfast', 'Port', 'Spiced Rum', 'Prosecco', 'Blue Curacao', 'Chocolate Cream Liquer', 'Peach Brandy', 'Opihir Gin', 'Gin', 'Chocolate Orange Gin Liquer'],
-            "Alcohol_2": ['Keylime Pie Gin', 'Rhubarb Gin', 'Custom Gin', 'Mead', 'Khalua', "Bailey's", 'Buckfast', 'Port', 'Spiced Rum', 'Prosecco', 'Blue Curacao', 'Chocolate Cream Liquer', 'Peach Brandy', 'Opihir Gin', 'Gin', 'Chocolate Orange Gin Liquer'],
-            "Mixer_1": ['Sloe Simple Syrup', 'Ginger Beer (Non-alcoholic)', 'Pepsi (reg)', 'Pepsi (max)', 'Lemonade', 'Tonic', 'Orange Juice', 'Grenadine'],
-            "Mixer_2": ['Sloe Simple Syrup', 'Ginger Beer (Non-alcoholic)', 'Pepsi (reg)', 'Pepsi (max)', 'Lemonade', 'Tonic', 'Orange Juice', 'Grenadine'],
-            "Garnish": ['Rosemary', 'Organge Slice', 'Lemon Slice', 'Cucumber']
+            "Base_Alcohol": core_alcohols,
+            "Speciality_Alcohol": specialty_alcohols,
+            "Mixer_1": mixer,
+            "Mixer_2": mixer,
+            "Garnish": garnish
         }
-        st.write(len(data["Alcohol_1"]))
         zipped_data = list(itertools.zip_longest(*data.values()))
         df = pd.DataFrame(zipped_data, columns=data.keys())
         df.index = range(1, len(df) + 1)
